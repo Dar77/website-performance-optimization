@@ -47,7 +47,7 @@ module.exports = function(grunt) {
           sizes: [{
               name: "extra-small",
               width: 70,
-              quality: 80 // image quality
+              quality: 50 // image quality
             },{
               name: "small",
               width: 115,
@@ -101,13 +101,15 @@ module.exports = function(grunt) {
       },
     },
 
-    // Copy all of the '.html' files to dist /*
+    // Copy all of the files and folders listed to dist /*
     copy: {
       main: {
         files: [
           {expand: true, src: '*.html', dest: 'dist/'},
 
-          {expand: true, cwd: 'src/views/', src: '*.html', dest: 'dist/views/'}
+          {expand: true, cwd: 'src/views/', src: '*.html', dest: 'dist/views/'},
+
+          {expand: true, cwd: 'src/', src: 'fonts/*', dest: 'dist/'}
         ],
       },
     },
