@@ -45,20 +45,20 @@ module.exports = function(grunt) {
       batch1: {
         options: {
           sizes: [{
+              name: "extra-small",
               width: 70,
-              suffix: "-xs",
               quality: 29 // image quality
             },{
-              width: 115.39,
-              suffix: "-s",
+              name: "small",
+              width: 115,
               quality: 29
             },{
+              name: "medium",
               width: 500,
-              suffix: "-m",
               quality: 29
             },{
+              name: "large",
               width: 600,
-              suffix: "-l",
               quality: 29
           }]
         },
@@ -72,16 +72,16 @@ module.exports = function(grunt) {
       batch2: {
         options: {
           sizes: [{
+              name: "extra-small",
               width: 136,
-              suffix: "-xs",
               quality: 29
           },{
+              name: "small",
               width: 360,
-              suffix: "-s",
               quality: 29
           },{
+              name: "large",
               width: 720,
-              suffix: "-l",
               quality: 29
           }]
         },
