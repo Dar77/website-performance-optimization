@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "opensans_regular";
+    src: url(../fonts/opensans-regular-webfont.woff2) format("woff2"),
+    url(../fonts/opensans-regular-webfont.woff) format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
 html {
   font-size: 100%;
   overflow-y: scroll;
@@ -15,7 +23,7 @@ button,
 input,
 select,
 textarea {
-  font-family: 'Open Sans', sans-serif; color: #333;
+  font-family: 'opensans_regular', sans-serif; color: #333;
 }
 
 a {
