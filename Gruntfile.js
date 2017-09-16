@@ -47,19 +47,19 @@ module.exports = function(grunt) {
           sizes: [{
               name: "extra-small",
               width: 70,
-              quality: 29 // image quality
+              quality: 80 // image quality
             },{
               name: "small",
               width: 115,
-              quality: 29
+              quality: 55
             },{
               name: "medium",
               width: 500,
-              quality: 29
+              quality: 55
             },{
               name: "large",
               width: 600,
-              quality: 29
+              quality: 55
           }]
         },
         files: [{
