@@ -45,6 +45,10 @@ module.exports = function(grunt) {
       batch1: {
         options: {
           sizes: [{
+              name: "extra-small",
+              width: 70,
+              quality: 55
+            },{
               name: "medium",
               width: 500,
               quality: 55
