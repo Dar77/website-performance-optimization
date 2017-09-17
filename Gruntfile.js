@@ -45,14 +45,6 @@ module.exports = function(grunt) {
       batch1: {
         options: {
           sizes: [{
-              name: "extra-small",
-              width: 70,
-              quality: 50 // image quality
-            },{
-              name: "small",
-              width: 115,
-              quality: 55
-            },{
               name: "medium",
               width: 500,
               quality: 55
@@ -105,10 +97,7 @@ module.exports = function(grunt) {
     copy: {
       main: {
         files: [
-          {expand: true, src: '*.html', dest: 'dist/'},
-
           {expand: true, cwd: 'src/views/', src: '*.html', dest: 'dist/views/'},
-
           {expand: true, cwd: 'src/', src: 'fonts/*', dest: 'dist/'}
         ],
       },
