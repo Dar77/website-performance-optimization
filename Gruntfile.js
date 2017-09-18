@@ -41,7 +41,7 @@ module.exports = function(grunt) {
       }
     },
 
-    responsive_images: { // reduce image file sizes
+    responsive_images: { // process image file size and quality
       batch1: {
         options: {
           sizes: [{
@@ -68,8 +68,8 @@ module.exports = function(grunt) {
       batch2: {
         options: {
           sizes: [{
-              name: "extra-small",
-              width: 136,
+              name: "small",
+              width: 204,
               quality: 29
           },{
               name: "small",
@@ -88,6 +88,20 @@ module.exports = function(grunt) {
           dest: 'dist/views/images/'
         }]
       },
+    },
+
+    cwebp: { // webp image conversion
+      dynamic: {
+        options: {
+          q: 55
+        },
+        files: [{
+          expand: true,
+          cwd: 'src/img/',
+          src: ['**/*.{gif,jpg,JPG,png,PNG}'],
+          dest: 'dist/img'
+        }]
+      }
     },
 
     /* Clear out whole dist directory if it exists */
@@ -111,10 +125,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-responsive-images');
+  grunt.loadNpmTasks('grunt-cwebp');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   // 'clean' must run first to clear out 'dist' (distribution) directory before placing in new files
-  grunt.registerTask('default', ['clean', 'uglify:my_target1', 'uglify:my_target2', 'cssmin:target1', 'cssmin:target2', 'copy', 'responsive_images:batch1', 'responsive_images:batch2']);
+  grunt.registerTask('default', ['clean', 'uglify:my_target1', 'uglify:my_target2', 'cssmin:target1', 'cssmin:target2', 'copy', 'responsive_images:batch1', 'responsive_images:batch2', 'cwebp']);
 };
 
 
@@ -129,6 +144,7 @@ module.exports = function(grunt) {
 
 // below: images
 //npm install grunt-responsive-images --save-dev  run with: grunt responsive_images
+//npm install --save-dev grunt-cwebp
 
 // below: clean, copy, make directory
 //npm install grunt-contrib-clean --save-dev
