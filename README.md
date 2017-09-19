@@ -13,7 +13,7 @@ ___
 
 #### Part 1: optimize page speed insights score for index.html
 
-The provided web-site's index.html file (currently very slow running) must be optimized so that it renders as fast as possible and achieves a **PageSpeed Insights** score of at least 90 for both desktop and mobile.
+The provided websites index.html file (currently very slow running) must be optimized so that it renders as fast as possible and achieves a **PageSpeed Insights** score of at least 90 for both desktop and mobile.
 
 #### Part 2: optimize frames per second in pizza.html
 
@@ -23,13 +23,16 @@ ___
 
 ### Optimized Page
 
+Visit optimized website: [Optimized](https://dar77.github.io/website-performance-optimization/)
+
 ![PageSpeed Insights score](src/img/readme-images/optimized-page.jpg)
-	Visit optimized web-site: [Optimized](https://dar77.github.io/website-performance-optimization/)
+
 
 ### Original Page
 
+Visit original website: [Before optimization]( https://dar77.github.io/frontend-nanodegree-mobile-portfolio/.)
+
 ![Original PageSpeed Insights score](src/img/readme-images/original-page.jpg)
-	Visit original web-site: [Before optimization]( https://dar77.github.io/frontend-nanodegree-mobile-portfolio/.)
 ___
 
 
