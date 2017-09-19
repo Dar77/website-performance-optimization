@@ -3,7 +3,7 @@ ___
 
 # Website Performance Optimization Project
 
-For this project I needed to optimize a provided on-line portfolio website for speed and in particular optimize the **critical rendering path** using skills learned in course. Also the provided portfolio contained a pizza.html page that featured poorly performing animation that needed to be optimized so that it ran at **60 frames per second** with smooth animation jank free!
+For this project I needed to optimize a provided online portfolio website for speed and in particular optimize the **critical rendering path** using the skills I've learned in the course. Also the provided portfolio contained a pizza.html page that featured poorly performing animation that needed to be optimized so that it ran at **60 frames per second** with smooth animation 'jank' free!
 
 This is a project from Udacity's **Frontend Nanodegree** [program](https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001).
 ___
@@ -24,12 +24,12 @@ ___
 ### Optimized Page
 
 ![PageSpeed Insights score](src/img/readme-images/optimized-page.jpg)
-Visit optimized web-site: [Optimized](https://dar77.github.io/website-performance-optimization/)
+	Visit optimized web-site: [Optimized](https://dar77.github.io/website-performance-optimization/)
 
 ### Original Page
 
 ![Original PageSpeed Insights score](src/img/readme-images/original-page.jpg)
-Visit original web-site: [Before optimization]( https://dar77.github.io/frontend-nanodegree-mobile-portfolio/.)
+	Visit original web-site: [Before optimization]( https://dar77.github.io/frontend-nanodegree-mobile-portfolio/.)
 ___
 
 
@@ -48,31 +48,32 @@ I've used the **Grunt** task runner to minify / copy my code and process images 
 1. To use **Grunt** you will need to have **Node.js** running on your system. [down load node](https://nodejs.org/en/).
 2. Change to the project's root directory:
 ```bash
-	cd /example/path/to/project-directory
+   cd /example/path/to/project-directory
 ```
 3. Install the projects dependencies (these are listed in the package.json file) by running:
 ```bash
-	npm install
+   npm install
 ```
 4. You then need to have the **Grunt command line interface (CLI)** installed globally. Run the following on Node.js command line:
 ```bash
-	npm install -g grunt-cli
+   npm install -g grunt-cli
 ```
 5. Continue with step **3** from instructions below:
+
 
 ### You have Node.js and the Grunt CLI
 
 1. Change to the project's root directory (if you are not already in that location):
 ```bash
-	cd /example/path/to/project-directory
+   cd /example/path/to/project-directory
 ```
 2. Install the projects dependencies (these are listed in the package.json file) by running:
 ```bash
-	npm install
+   npm install
 ```
 3. Run grunt tasks with:
 ```bash
-	grunt
+   grunt
 ```
 
 #### Notes:
@@ -89,7 +90,23 @@ ___
 
 ## Solution - Part One
 
-To
+To reach the **PageSpeed Insights** target of **90** or above I optimized the **critical rendering path** by reducing the number of **render and parser blocking resources** the browser is handed. Also I reduced the size of those resources where possible.
+
+- I moved the javascript files to the bottom of the page before the closing **body** tag.
+- For external scripts I added an **async** attribute to the **script** tag.
+- I inlined the **css** in the head of the document. Which goes against what I would normally do (separation of concerns). This seemed necessary to get the **render blocking resources** removed and achieve the speed needed.
+- I moved the **print.css** into a script that defers its loading. In addition I'd added a media attribute of print.
+- I removed the **Google Fonts** link and instead used the same font in a downloaded **@fontface** Open Sans type face. (saved on an http request)
+- I added a **rel='preload'** link in the head that suggests moving the request for the fonts earlier in the page load. (without blocking behavior)
+- Using **Grunt** all **css** and **javascript** was minified to reduce bytes.
+- For images I settled on using **data uri's** to inline the images direct in the **index.html**. (reducing http requests)
+
+This reduced **index.html** number of **critical resources** to just the **html**.
+
+- For the other **.html** files I used external **css** files marked with media attributes for print and portrait. (reducing size of critical resources)
+- For images I used a combination of **data uri** and **Grunt** processed **webp** files with regular **jpeg** files as a fall back.
+
+
 ___
 
 
