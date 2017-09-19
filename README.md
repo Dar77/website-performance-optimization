@@ -30,7 +30,7 @@ Visit optimized website: [Optimized](https://dar77.github.io/website-performance
 
 ### Original Page
 
-Visit original website: [Before optimization]( https://dar77.github.io/frontend-nanodegree-mobile-portfolio/.)
+Visit original website: [Before optimization](https://dar77.github.io/performance-project-original-files/)
 
 ![Original PageSpeed Insights score](src/img/readme-images/original-page.jpg)
 ___
@@ -86,7 +86,6 @@ I've used the **Grunt** task runner to minify / copy my code and process images 
 - **Please Note** the **dist** directory already contains these processed files. You can run **Grunt** for testing purposes.
 - **.html** files in project root are set up to reference contents of **dist** directory.
 
-
 See these extra instructions for [getting started with Grunt](https://gruntjs.com/getting-started) (if needed).
 ___
 
@@ -108,8 +107,6 @@ This reduced **index.html** number of **critical resources** to just the **html*
 
 - For the other **.html** files I used external **css** files marked with media attributes for print and portrait. (reducing size of critical resources)
 - For images I used a combination of **data uri** and **Grunt** processed **webp** files with regular **jpeg** files as a fall back.
-
-
 ___
 
 
