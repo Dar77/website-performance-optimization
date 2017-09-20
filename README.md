@@ -30,7 +30,7 @@ Visit optimized website: [Optimized](https://dar77.github.io/website-performance
 
 ### Original Page
 
-Visit original website: [Before optimization](https://dar77.github.io/performance-project-original-files/)
+Visit original websites Git Hub repository: [Before optimization](https://github.com/udacity/frontend-nanodegree-mobile-portfolio)
 
 ![Original PageSpeed Insights score](src/img/readme-images/original-page.jpg)
 ___
