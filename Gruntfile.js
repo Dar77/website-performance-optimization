@@ -61,7 +61,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           src: ['*.{gif,jpg,JPG,png,PNG}'],
-          cwd: 'src/img/',
+          cwd: 'src/img',
           dest: 'dist/img/'
         }]
       },
@@ -70,7 +70,7 @@ module.exports = function(grunt) {
           sizes: [{
               name: "small",
               width: 204,
-              quality: 29
+              quality: 20
           },{
               name: "small",
               width: 360,
@@ -84,23 +84,38 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           src: ['*.{gif,jpg,JPG,png,PNG}'],
-          cwd: 'src/views/images/',
-          dest: 'dist/views/images/'
+          cwd: 'src/views/images',
+          dest: 'dist/views/images'
         }]
       },
     },
 
     cwebp: { // webp image conversion
-      dynamic: {
-        options: {
-          q: 55
-        },
-        files: [{
-          expand: true,
-          cwd: 'src/img/',
-          src: ['**/*.{gif,jpg,JPG,png,PNG}'],
-          dest: 'dist/img'
-        }]
+      batch1: {
+        dynamic: {
+          options: {
+            q: 55
+          },
+          files: [{
+            expand: true,
+            cwd: 'src/img',
+            src: ['**/*.{gif,jpg,JPG,png,PNG}'],
+            dest: 'dist/img'
+          }]
+        }
+      },
+      batch2: {
+        dynamic: {
+          options: {
+            q: 55
+          },
+          files: [{
+            expand: true,
+            cwd: 'src/views/images',
+            src: ['**/*.{gif,jpg,JPG,png,PNG}'],
+            dest: 'dist/views/images'
+          }]
+        }
       }
     },
 
@@ -129,7 +144,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   // 'clean' must run first to clear out 'dist' (distribution) directory before placing in new files
-  grunt.registerTask('default', ['clean', 'uglify:my_target1', 'uglify:my_target2', 'cssmin:target1', 'cssmin:target2', 'copy', 'responsive_images:batch1', 'responsive_images:batch2', 'cwebp']);
+  grunt.registerTask('default', ['clean', 'uglify:my_target1', 'uglify:my_target2', 'cssmin:target1', 'cssmin:target2', 'copy', 'responsive_images:batch1', 'responsive_images:batch2', 'cwebp:batch1', 'cwebp:batch2']);
 };
 
 
