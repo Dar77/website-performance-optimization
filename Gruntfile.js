@@ -62,17 +62,13 @@ module.exports = function(grunt) {
           expand: true,
           src: ['*.{gif,jpg,JPG,png,PNG}'],
           cwd: 'src/img',
-          dest: 'dist/img/'
+          dest: 'dist/img'
         }]
       },
       batch2: {
         options: {
           sizes: [{
-              name: "small",
-              width: 204,
-              quality: 20
-          },{
-              name: "small",
+              name: "medium",
               width: 360,
               quality: 29
           },{
@@ -91,33 +87,19 @@ module.exports = function(grunt) {
     },
 
     cwebp: { // webp image conversion
-      batch1: {
-        dynamic: {
-          options: {
-            q: 55
-          },
-          files: [{
-            expand: true,
-            cwd: 'src/img',
-            src: ['**/*.{gif,jpg,JPG,png,PNG}'],
-            dest: 'dist/img'
-          }]
-        }
-      },
-      batch2: {
-        dynamic: {
-          options: {
-            q: 55
-          },
-          files: [{
-            expand: true,
-            cwd: 'src/views/images',
-            src: ['**/*.{gif,jpg,JPG,png,PNG}'],
-            dest: 'dist/views/images'
-          }]
-        }
+      dynamic: {
+        options: {
+          q: 55
+        },
+        files: [{
+          expand: true,
+          cwd: 'src/img',
+          src: ['**/*.{gif,jpg,JPG,png,PNG}'],
+          dest: 'dist/img'
+        }]
       }
     },
+
 
     /* Clear out whole dist directory if it exists */
     clean: {
@@ -131,7 +113,8 @@ module.exports = function(grunt) {
       main: {
         files: [
           {expand: true, cwd: 'src/views/', src: '*.html', dest: 'dist/views/'},
-          {expand: true, cwd: 'src/', src: 'fonts/*', dest: 'dist/'}
+          {expand: true, cwd: 'src/', src: 'fonts/*', dest: 'dist/'},
+          {expand: true, cwd: 'src/views/images/', src: 'pizza-small.png', dest: 'dist/views/images/'}
         ],
       },
     },
@@ -144,7 +127,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   // 'clean' must run first to clear out 'dist' (distribution) directory before placing in new files
-  grunt.registerTask('default', ['clean', 'uglify:my_target1', 'uglify:my_target2', 'cssmin:target1', 'cssmin:target2', 'copy', 'responsive_images:batch1', 'responsive_images:batch2', 'cwebp:batch1', 'cwebp:batch2']);
+  grunt.registerTask('default', ['clean', 'uglify:my_target1', 'uglify:my_target2', 'cssmin:target1', 'cssmin:target2', 'copy', 'responsive_images:batch1', 'responsive_images:batch2', 'cwebp']);
 };
 
 
