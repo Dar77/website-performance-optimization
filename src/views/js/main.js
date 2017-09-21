@@ -529,12 +529,31 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
+
+
+
+/*
   var items = document.querySelectorAll('.mover');
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5)); // TODO needs fixing ================================================
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
+*/
 
+//new
+
+
+  var l = items.length,
+      s = (document.body.scrollTop / 1250),
+      phase;
+
+  for (var i = 0; i < l; ++i) {
+    phase = Math.sin(s + (i % 5));
+    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+  }
+
+
+// end new
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
   window.performance.mark("mark_end_frame");
