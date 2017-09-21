@@ -422,7 +422,7 @@ var resizePizzas = function(size) {  //=========================================
   changeSliderLabel(size);
 
    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
-/* ==========================================================================================================================
+/*
   function determineDx (elem, size) {
     var oldWidth = elem.offsetWidth;
     var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
@@ -457,9 +457,9 @@ var resizePizzas = function(size) {  //=========================================
       document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
     }
   }
-===============================================================================================================================*/
+*/
 
-/* Removed old changePizzaSizes() function and the unnecessary and complicated determineDx() function.
+/* Removed old changePizzaSizes() function and the unnecessary and complicated determineDx() function. =================================
 The new code uses percentage values for each slider position*/
   function changePizzaSizes(size) {
       var newWidth;
@@ -496,8 +496,8 @@ The new code uses percentage values for each slider position*/
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+var pizzasDiv = document.getElementById("randomPizzas"); // moved out of loop ===========================================
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -535,7 +535,8 @@ function updatePositions() {
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 */
-
+/*Removed the section above because it was causing forced synchronous layout due to a call ===========================================
+being made on layout and a change in styles within the same loop*/
   var items = document.querySelectorAll('.mover');
   var scroll = (document.body.scrollTop / 1250);
   var phase;
@@ -562,6 +563,8 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+  var selection = document.querySelector("#movingPizzas1"); // moved document querySelector out of loop ================================
+
   for (var i = 0; i < 200; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
@@ -570,7 +573,7 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    selection.appendChild(elem);
   }
   updatePositions();
 });
