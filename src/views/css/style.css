@@ -33,6 +33,8 @@ form {
   position: fixed;
   width: 256px;
   z-index: -1;
+  will-change: transform; /* to put the .mover elements on their own layer and reduce the need for paint */
+  transform: translate z(0); /* as above */
 }
 
 .randomPizzaContainer {
