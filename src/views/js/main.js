@@ -422,7 +422,7 @@ var resizePizzas = function(size) {  //=========================================
   changeSliderLabel(size);
 
    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
-/*
+/* ==========================================================================================================================
   function determineDx (elem, size) {
     var oldWidth = elem.offsetWidth;
     var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
@@ -457,9 +457,11 @@ var resizePizzas = function(size) {  //=========================================
       document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
     }
   }
-*/
+===============================================================================================================================*/
 
-  function changePizzaSizes(size) { //===============================added this
+/* Removed old changePizzaSizes() function and the unnecessary and complicated determineDx() function.
+The new code uses percentage values for each slider position*/
+  function changePizzaSizes(size) {
       var newWidth;
       switch(size) {
         case "1":
@@ -474,7 +476,8 @@ var resizePizzas = function(size) {  //=========================================
         default:
           console.log("bug in sizeSwitcher");
     }
-
+    /* in the removed code the function repeated itself and made layout calls followed by
+     change of styles within the loop causing 'forced synchronous layout' */
     var pizzaContainer = document.querySelectorAll(".randomPizzaContainer");
     for (var i = 0; i < pizzaContainer.length; i++) {
       pizzaContainer[i].style.width = newWidth + "%";
@@ -528,7 +531,7 @@ function updatePositions() {
 
   var items = document.querySelectorAll('.mover');
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5)); // TODO needs fixing ================================================
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
