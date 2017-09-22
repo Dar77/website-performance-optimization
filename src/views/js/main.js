@@ -496,7 +496,7 @@ The new code uses percentage values for each slider position*/
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
-var pizzasDiv = document.getElementById("randomPizzas"); // moved out of loop ===========================================
+var pizzasDiv = document.getElementById("randomPizzas"); // moved getElementById out of loop ==========================================
 for (var i = 2; i < 100; i++) {
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
@@ -529,14 +529,14 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 /*
-
   var items = document.querySelectorAll('.mover');
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 */
-/*Removed the section above because it was causing forced synchronous layout due to a call ===========================================
+
+/*Removed the section above because it was causing 'forced synchronous layout' due to a call ===========================================
 being made on layout and a change in styles within the same loop*/
   var items = document.querySelectorAll('.mover');
   var scroll = (document.body.scrollTop / 1250);
@@ -559,17 +559,18 @@ being made on layout and a change in styles within the same loop*/
 
 // runs updatePositions on scroll
 //window.addEventListener('scroll', updatePositions);
-// request section
+
+// Removed code above, updatePositions() now runs with requestAnimationFrame() on scroll ===============================================
 window.addEventListener('scroll', function(){
   updatePositions();
   requestAnimationFrame(updatePositions);
 });
-//
+
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  var selection = document.querySelector("#movingPizzas1"); // moved document querySelector out of loop ================================
+  var selection = document.querySelector("#movingPizzas1"); // moved document.querySelector out of loop ================================
 
   for (var i = 0; i < 200; i++) {
     var elem = document.createElement('img');
