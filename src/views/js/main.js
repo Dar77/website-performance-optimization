@@ -556,28 +556,15 @@ being made on layout and a change in styles within the same loop*/
     logAverageFrame(timesToUpdatePosition);
   }
 }
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-/* remove this example bounded by++
-var getScroll;
-function repeatOften() {
-    // use translateY instead of translate3D
-    document.getElementById("moveable").style.transform = "translateY(" + getScroll + "px)";
-};
 
-document.getElementById("content").addEventListener("scroll", function(){
-
-    getScroll = this.scrollTop * 1.2;
-    requestAnimationFrame(repeatOften);
-
-});*/
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // runs updatePositions on scroll
-//1 window.addEventListener('scroll', updatePositions);
+//window.addEventListener('scroll', updatePositions);
+// request section
 window.addEventListener('scroll', function(){
   updatePositions();
   requestAnimationFrame(updatePositions);
 });
-
+//
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
