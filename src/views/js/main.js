@@ -536,9 +536,8 @@ function updatePositions() {
   }
 */
 
-/*Removed the section above because it was causing 'forced synchronous layout' due to a call ===========================================
-being made on layout and a change in styles within the same loop*/
-  var items = document.querySelectorAll('.mover');
+  //Removed the section above because it was causing 'forced synchronous layout' due to a call =========================================
+  //  var items = document.querySelectorAll('.mover');
   var scroll = (document.body.scrollTop / 1250);
   var phase;
 
@@ -562,7 +561,6 @@ being made on layout and a change in styles within the same loop*/
 
 // Removed code above, updatePositions() now runs with requestAnimationFrame() on scroll ===============================================
 window.addEventListener('scroll', function(){
-  updatePositions();
   requestAnimationFrame(updatePositions);
 });
 
