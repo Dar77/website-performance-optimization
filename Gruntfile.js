@@ -114,7 +114,8 @@ module.exports = function(grunt) {
         files: [
           {expand: true, cwd: 'src/views/', src: '*.html', dest: 'dist/views/'},
           {expand: true, cwd: 'src/', src: 'fonts/*', dest: 'dist/'},
-          {expand: true, cwd: 'src/views/images/', src: 'pizza-small.png', dest: 'dist/views/images/'}
+          {expand: true, cwd: 'src/views/images/', src: 'pizza-small.png', dest: 'dist/views/images/'},
+          {expand: true, cwd: 'src/views/images/', src: 'pizza-extra-small.png', dest: 'dist/views/images/'}
         ],
       },
     },
