@@ -29,6 +29,7 @@
             clearTimeout(id);
         };
 }());
+// above - added requestAnimationFrame polyfill ================================================================
 
 /*
 Welcome to the 60fps project! Your goal is to make Cam's Pizzeria website run
@@ -491,8 +492,8 @@ var resizePizzas = function(size) {  //=========================================
   }
 */
 
-/* Removed old changePizzaSizes() function and the unnecessary and complicated determineDx() function. =================================
-The new code uses percentage values for each slider position*/
+// Removed old changePizzaSizes() function and the unnecessary and complicated determineDx() function. =================================
+// The new code uses percentage values for each slider position
   function changePizzaSizes(size) {
       var newWidth;
       switch(size) {
@@ -510,7 +511,7 @@ The new code uses percentage values for each slider position*/
     }
     /* in the removed code the function repeated itself and made layout calls followed by
      change of styles within the loop causing 'forced synchronous layout' */
-    var pizzaContainer = document.querySelectorAll(".randomPizzaContainer");
+    var pizzaContainer = document.getElementsByClassName("randomPizzaContainer"); // changed from querySelectorAll to getElementsByClassName
     for (var i = 0; i < pizzaContainer.length; i++) {
       pizzaContainer[i].style.width = newWidth + "%";
     }
@@ -564,19 +565,24 @@ function updatePositions() {
   var items = document.querySelectorAll('.mover');
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    console.log(phase);
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    console.log(items[i].style.left);
   }
 */
 
 /*Removed the section above because it was causing 'forced synchronous layout' due to a call ===========================================
 being made on layout and a change in styles within the same loop*/
-  var items = document.querySelectorAll('.mover');
+// working original code
+  var items = document.getElementsByClassName("mover"); //replaced querySelectorAll with getElementsByClassName ========================
   var scroll = (document.body.scrollTop / 1250);
   var phase;
+  var px;
 
   for (var i = 0; i < items.length; i++) {
     phase = Math.sin(scroll + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    px = items[i].basicLeft + 100 * phase;
+    items[i].style.transform = "translateX(" + px + "px)"; // removed style.left added transform: translateX()
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -601,14 +607,14 @@ window.addEventListener('scroll', function(){
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  var selection = document.querySelector("#movingPizzas1"); // moved document.querySelector out of loop ================================
+  var selection = document.getElementById("movingPizzas1"); // moved document.querySelector out of loop, changed to get by id ==========
 
-  for (var i = 0; i < 200; i++) {
+  for (var i = 0; i < 40; i++) { //reduced from 200 to 40 ==============================================================================
     var elem = document.createElement('img');
     elem.className = 'mover';
-    elem.src = "images/pizza-small.png";
+    elem.src = "images/pizza-extra-small.png";
     elem.style.height = "100px";
-    elem.style.width = "73.333px";
+    elem.style.width = "73px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     selection.appendChild(elem);
