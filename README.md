@@ -227,6 +227,7 @@ To acheive the required 60 frames a second on scroll for pizza.html, I made the 
 ```
 
 - Adjusted **addEventListener** by using **requestAnimationFrame** to help schedule the running of **updatePositions()** function more efficiently when the user scrolls.
+- Added the **requestAnimationFrame polyfill** at the top of the file.
 
 ```javascript
   // Removed - runs updatePositions on scroll
