@@ -268,7 +268,7 @@ To acheive the required 60 frames a second on scroll for pizza.html, I made the 
 
 I made the following small changes in the **css** file (commented):
 
-- Added a **left** property to **.mover** class to control the initial layout of pizzas when using the transform: translateX() rule in the **js**.
+- Added a **left** property to **.mover** class to control the initial layout of pizzas when using the **transform: translateX()** rule in the **js**.
 - Added **will-change: transform** and **transform: translateZ(0)** to give the animated pizzas their own compositing layer and drastically reduce the need to re-paint the screen.
 
 ```css
