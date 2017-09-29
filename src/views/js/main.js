@@ -432,7 +432,7 @@ var pizzaElementGenerator = function(i) {
 };
 
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
-var resizePizzas = function(size) {  //========================================================================problem
+var resizePizzas = function(size) {
   window.performance.mark("mark_start_resize");   // User Timing API function
 
   // Changes the value for the size of the pizza above the slider
@@ -455,7 +455,7 @@ var resizePizzas = function(size) {  //=========================================
   changeSliderLabel(size);
 
    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
-/*
+  /*
   function determineDx (elem, size) {
     var oldWidth = elem.offsetWidth;
     var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
@@ -480,7 +480,7 @@ var resizePizzas = function(size) {  //=========================================
 
     return dx;
   }
-*/
+  */
   // Iterates through pizza elements on the page and changes their widths
   /*
   function changePizzaSizes(size) {
@@ -490,10 +490,10 @@ var resizePizzas = function(size) {  //=========================================
       document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
     }
   }
-*/
+  */
 
-// Removed old changePizzaSizes() function and the unnecessary and complicated determineDx() function. =================================
-// The new code uses percentage values for each slider position
+  // Removed old changePizzaSizes() function and the unnecessary and complicated determineDx() function. ==============================
+  // The new code uses percentage values for each slider position
   function changePizzaSizes(size) {
       var newWidth;
       switch(size) {
@@ -512,7 +512,8 @@ var resizePizzas = function(size) {  //=========================================
     /* in the removed code the function repeated itself and made layout calls followed by
      change of styles within the loop causing 'forced synchronous layout' */
     var pizzaContainer = document.getElementsByClassName("randomPizzaContainer"); // changed from querySelectorAll to getElementsByClassName
-    for (var i = 0; i < pizzaContainer.length; i++) {
+    var length = pizzaContainer.length;
+    for (var i = 0; i < length; i++) {
       pizzaContainer[i].style.width = newWidth + "%";
     }
   }
@@ -557,11 +558,15 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
+var items = document.getElementsByClassName("mover"); //replaced querySelectorAll with getElementsByClassName ========================
+// made items global, so that it doesn't run every time with updatePositions() function
+
 // Moves the sliding background pizzas based on scroll position
-function updatePositions() {
+function updatePositions(m) {
   frame++;
   window.performance.mark("mark_start_frame");
-/*
+
+  /*original loop removed
   var items = document.querySelectorAll('.mover');
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
@@ -569,24 +574,27 @@ function updatePositions() {
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
     console.log(items[i].style.left);
   }
-*/
-
-/*Removed the section above because it was causing 'forced synchronous layout' due to a call ===========================================
-being made on layout and a change in styles within the same loop*/
-// working original code
-  var items = document.getElementsByClassName("mover"); //replaced querySelectorAll with getElementsByClassName ========================
-  var scroll = (document.body.scrollTop / 1250);
+  */
+  // below - code for new updatePositions function
+  var scroll = (document.body.scrollTop / 1250); // moved calculation out of loop
+  var l = items.length; //access .length outside of loop
   var phase;
-  var px;
+  var x;
+  var i;
 
-  for (var i = 0; i < items.length; i++) {
+  if (m != 100) { // after the initial positioning of the pizzas use a smaller increment to animate
+    m = 5;
+  }
+
+  for (i = 0; i < l; i++) {
     phase = Math.sin(scroll + (i % 5));
-    px = items[i].basicLeft + 100 * phase;
-    items[i].style.transform = "translateX(" + px + "px)"; // removed style.left added transform: translateX()
+    x = items[i].basicLeft += m * phase;
+    items[i].style.transform = "translateX(" + x + "px)"; // removed style.left added transform: translateX()
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
+
   window.performance.mark("mark_end_frame");
   window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame");
   if (frame % 10 === 0) {
@@ -595,10 +603,10 @@ being made on layout and a change in styles within the same loop*/
   }
 }
 
-// runs updatePositions on scroll
-//window.addEventListener('scroll', updatePositions);
+// Removed - runs updatePositions on scroll
+// window.addEventListener('scroll', updatePositions);
 
-// Removed code above, updatePositions() now runs with requestAnimationFrame() on scroll ===============================================
+// New code below, updatePositions() now runs with requestAnimationFrame() on scroll ===============================================
 window.addEventListener('scroll', function(){
   requestAnimationFrame(updatePositions);
 });
@@ -607,17 +615,18 @@ window.addEventListener('scroll', function(){
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+  var res = ((screen.height) / s) * cols; // screen height divided by 256 x 8
   var selection = document.getElementById("movingPizzas1"); // moved document.querySelector out of loop, changed to get by id ==========
-
-  for (var i = 0; i < 40; i++) { //reduced from 200 to 40 ==============================================================================
+  //for (var i = 0; i < 32; i++) { // 32 reduced number of pizzas, 4 lines of 8
+  for (var i = 0; i < res; i++) { // dynamically updates number of pizzas based on screen height =======================================
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza-extra-small.png";
-    elem.style.height = "100px";
-    elem.style.width = "73px";
+    //elem.style.height = "94px"; // height and width values for image moved to css
+    //elem.style.width = "73px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     selection.appendChild(elem);
   }
-  updatePositions();
+  updatePositions(100); // updatePositions run with starting layout argument
 });
