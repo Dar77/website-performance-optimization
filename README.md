@@ -114,6 +114,7 @@ ___
 ## Solution - Part Two
 
 Visit the optimized pizza.html: [website](https://dar77.github.io/website-performance-optimization/dist/views/pizza.html)
+
 ![PageSpeed Insights score](src/img/readme-images/pizza-page.png)
 ___
 
@@ -180,7 +181,7 @@ To acheive the required 60 frames a second on scroll for pizza.html, I made the 
 
 - Changed the **updatePositions()** function that included lots of calculations that were being carried out on every iteration of the loop.
 
-### New updatePositions() function
+#### New updatePositions() function
 
 - Used **getElementsByClassName** to grab all of the **mover** class animated pizzas. Moved this out into global scope so it isn't accessed every time **updatePositions()** runs.
 - Moved the **(document.body.scrollTop / 1250)** calculation out of the loop.
@@ -264,7 +265,7 @@ To acheive the required 60 frames a second on scroll for pizza.html, I made the 
 });
 ```
 
-### Changes in views/css/style.css
+#### Changes in views/css/style.css
 
 I made the following small changes in the **css** file (commented):
 
