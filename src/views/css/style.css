@@ -33,9 +33,14 @@ form {
   position: fixed;
   width: 256px;
   z-index: -1;
-  left: -10%; /* adjustment to positioning of pizzas */
+  left: 0%; /* adjustment to positioning of pizzas when using transform: translateX*/
   will-change: transform; /* suggestion to browser to place this element on its own layer */
-  transform: translate z(0); /* as above (but hack) */
+  transform: translateZ(0); /* places selected element on its own layer, (for older browsers)*/
+}
+
+img.mover {
+  width: 73px; /* pizza image width and height now defined in the css*/
+  height: 94px;
 }
 
 .randomPizzaContainer {
