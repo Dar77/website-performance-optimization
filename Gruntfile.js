@@ -68,10 +68,6 @@ module.exports = function(grunt) {
       batch2: {
         options: {
           sizes: [{
-              name: "medium",
-              width: 360,
-              quality: 29
-          },{
               name: "large",
               width: 720,
               quality: 29
@@ -79,7 +75,7 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          src: ['*.{gif,jpg,JPG,png,PNG}'],
+          src: ['pizzeria.jpg'],
           cwd: 'src/views/images',
           dest: 'dist/views/images'
         }]
