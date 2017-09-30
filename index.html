@@ -6,18 +6,8 @@
     <meta name="description" content="Website Performance Optimization">
     <meta name="author" content="Darren Ware">
     <title>Darren's: Portfolio</title>
-    <!--<link rel="preload" href="dist/fonts/opensans-regular-webfont.woff2" as="font"> requests fonts early, non-render-blocking-->
-    <!--<link rel="preload" href="dist/fonts/opensans-regular-webfont.woff" as="font"> -->
-    <!-- <link href="//fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet"> removed -->
+    <!-- <link href="//fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet"> loaded with webfont loader asynchronously-->
     <style>
-      /*@font-face {  added 'open sans' @fontface typeface instaed of google fonts option
-        font-family: "opensans_regular";
-          src: url(dist/fonts/opensans-regular-webfont.woff2) format("woff2"),
-          url(dist/fonts/opensans-regular-webfont.woff) format("woff");
-          font-weight: normal;
-          font-style: normal;
-      }*/
-
       html {
         font-size: 100%;
         overflow-y: scroll;
@@ -193,8 +183,8 @@
     </noscript>
     <script>
       var loadDeferredStyles = function() {
-        var addStylesNode = document.getElementById("deferred-styles");
-        var replacement = document.createElement("div");
+        var addStylesNode = document.getElementById('deferred-styles');
+        var replacement = document.createElement('div');
         replacement.innerHTML = addStylesNode.textContent;
         document.body.appendChild(replacement)
         addStylesNode.parentElement.removeChild(addStylesNode);
