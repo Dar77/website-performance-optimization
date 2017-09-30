@@ -98,8 +98,7 @@ To reach the **PageSpeed Insights** target of **90** or above I optimized the **
 - For external scripts I added an **async** attribute to the **script** tag.
 - I inlined the **css** in the head of the document. Which goes against what I would normally do (separation of concerns). This seemed necessary to get the **render blocking resources** removed and achieve the speed needed.
 - I moved the **print.css** into a script that defers its loading. In addition I'd added a media attribute of print.
-- I removed the **Google Fonts** link and instead used the same font in a downloaded **@fontface** Open Sans type face. (saved on an http request)
-- I added a **rel='preload'** link in the head that suggests moving the request for the fonts earlier in the page load. (without blocking behavior)
+- I removed the **Google Fonts** request from the **head** section and used **Web Font Loader** to load the fonts asynchronously.
 - Using **Grunt** all **css** and **javascript** was minified to reduce bytes.
 - For images I settled on using **data uri's** to inline the images direct in the **index.html**. (reducing http requests)
 - I used **Git Hub** hosting to run the website through **PageSpeed Insights**. https://dar77.github.io/website-performance-optimization/
@@ -107,6 +106,8 @@ To reach the **PageSpeed Insights** target of **90** or above I optimized the **
 This reduced **index.html** number of **critical resources** to just the **html**.
 
 - For the other **.html** files I used external **css** files marked with media attributes for print and portrait. (reducing size of critical resources)
+- I removed the **Google Fonts** link and instead used the same font in a downloaded **@fontface** Open Sans type face. (saved on an http request)
+- I added a **rel='preload'** link in the head that suggests moving the request for the fonts earlier in the page load. (without blocking behavior)
 - For images I used a combination of **data uri** and **Grunt** processed **webp** files with regular **jpeg** files as a fall back.
 ___
 
