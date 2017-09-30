@@ -132,10 +132,10 @@ To speed up the slider for changing pizza sizes I made the following changes:
 
 ```javascript
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+    for (var i = 0; i < document.querySelectorAll('.randomPizzaContainer').length; i++) {
+      var dx = determineDx(document.querySelectorAll('.randomPizzaContainer')[i], size);
+      var newwidth = (document.querySelectorAll('.randomPizzaContainer')[i].offsetWidth + dx) + 'px';
+      document.querySelectorAll('.randomPizzaContainer')[i].style.width = newwidth;
     }
   }
 ```
@@ -153,24 +153,24 @@ To speed up the slider for changing pizza sizes I made the following changes:
   function changePizzaSizes(size) {
       var newWidth;
       switch(size) {
-        case "1":
+        case '1':
           newWidth = 25;
           break;
-        case "2":
+        case '2':
           newWidth = 33.3;
           break;
-        case "3":
+        case '3':
           newWidth = 50;
           break;
         default:
-          console.log("bug in sizeSwitcher");
+          console.log('bug in sizeSwitcher');
     }
     /* in the removed code the function repeated itself and made layout calls followed by
      change of styles within the loop causing 'forced synchronous layout' */
-    var pizzaContainer = document.getElementsByClassName("randomPizzaContainer"); // changed from querySelectorAll to getElementsByClassName
+    var pizzaContainer = document.getElementsByClassName('randomPizzaContainer'); // changed from querySelectorAll to getElementsByClassName
     var length = pizzaContainer.length;
     for (var i = 0; i < length; i++) {
-      pizzaContainer[i].style.width = newWidth + "%";
+      pizzaContainer[i].style.width = newWidth + '%';
     }
   }
 
@@ -184,19 +184,15 @@ To acheive the required 60 frames a second on scroll for pizza.html, I made the 
 #### New updatePositions() function
 
 - Used **getElementsByClassName** to grab all of the **mover** class animated pizzas. Moved this out into global scope so it isn't accessed every time **updatePositions()** runs.
-- Moved the **(document.body.scrollTop / 1250)** calculation out of the loop.
+- Moved the **(document.body.scrollTop || document.documentElement.scrollTop)** calculation out of the loop.
 - Assigned **items.length** to a variable outside of loop.
-- Added an **if statement** to control animation speed after initial page load.
 - Used **style.transform = "translateX()"** instead of **style.left** to position elements for better animation performance.
 
 ```javascript
-  var items = document.getElementsByClassName("mover"); //replaced querySelectorAll with getElementsByClassName
-  // made items global, so that it doesn't run every time with updatePositions() function
-
-  // Moves the sliding background pizzas based on scroll position
-  function updatePositions(m) {
+// Moves the sliding background pizzas based on scroll position
+function updatePositions() {
   frame++;
-  window.performance.mark("mark_start_frame");
+  window.performance.mark('mark_start_frame');
 
   /*original loop removed
   var items = document.querySelectorAll('.mover');
@@ -207,23 +203,17 @@ To acheive the required 60 frames a second on scroll for pizza.html, I made the 
     console.log(items[i].style.left);
   }
   */
-
   // below - code for new updatePositions function
-  var scroll = (document.body.scrollTop / 1250); // moved calculation out of loop
+  var scroll = (document.body.scrollTop || document.documentElement.scrollTop); // moved calculation out of loop
   var l = items.length; //access .length outside of loop
   var phase;
-  var x;
   var i;
-
-  if (m != 100) { // after the initial positioning of the pizzas use a smaller increment to animate
-    m = 5;
-  }
 
   for (i = 0; i < l; i++) {
     phase = Math.sin(scroll + (i % 5));
-    x = items[i].basicLeft += m * phase;
-    items[i].style.transform = "translateX(" + x + "px)"; // removed style.left added transform: translateX()
+    items[i].style.transform = 'translateX(' + 100 * phase + 'px)'; // removed style.left added transform: translateX()
   }
+
 ```
 
 - Adjusted **addEventListener** by using **requestAnimationFrame** to help schedule the running of **updatePositions()** function more efficiently when the user scrolls.
@@ -242,7 +232,7 @@ To acheive the required 60 frames a second on scroll for pizza.html, I made the 
 - Used the variable **res** to hold the calculation for the number of pizzas needed to fill the screen dynamically reducing the number of animated pizzas from 200.
 - Used **getElementById** to access the **movingPizzas1** id and moved it out of the loop.
 - Moved the **height** and **width** image size properties to the **css**.
-- Added an initial layout parameter for **updatePositions(100)**.
+- Removed **elem.basicLeft** and replaced with **elem.style.left** because I'm using **translateX()**property and need the left style for the layout.
 
 ```javascript
   // Generates the sliding pizzas when the page loads.
@@ -250,19 +240,20 @@ To acheive the required 60 frames a second on scroll for pizza.html, I made the 
   var cols = 8;
   var s = 256;
   var res = ((screen.height) / s) * cols; // screen height divided by 256 x 8
-  var selection = document.getElementById("movingPizzas1"); // moved document.querySelector out of loop, changed to get by id
-  //for (var i = 0; i < 200; i++) {
-  for (var i = 0; i < res; i++) { // dynamically updates number of pizzas based on screen height
+  var selection = document.getElementById('movingPizzas1'); // moved document.querySelector out of loop, changed to get by id ==========
+  //for (var i = 0; i < 32; i++) { // 32 reduced number of pizzas, 4 lines of 8
+  for (var i = 0; i < res; i++) { // dynamically updates number of pizzas based on screen height =======================================
     var elem = document.createElement('img');
     elem.className = 'mover';
-    elem.src = "images/pizza-extra-small.png";
+    elem.src = 'images/pizza-extra-small.png';
     //elem.style.height = "94px"; // height and width values for image moved to css
     //elem.style.width = "73px";
-    elem.basicLeft = (i % cols) * s;
+    elem.style.left = (i % cols) * s + 'px';
+    //elem.basicLeft = (i % cols) * s; // removed
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     selection.appendChild(elem);
   }
-  updatePositions(100); // updatePositions run with starting layout argument
+  updatePositions();
 });
 ```
 
