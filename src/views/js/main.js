@@ -575,7 +575,7 @@ function updatePositions() {
   }
   */
   // below - code for new updatePositions function
-  var scroll = (document.body.scrollTop || document.documentElement.scrollTop); // moved calculation out of loop
+  var scroll = (document.body.scrollTop || document.documentElement.scrollTop) / 1250; // moved calculation out of loop
   var l = items.length; //access .length outside of loop
   var phase;
   var i;
