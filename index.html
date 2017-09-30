@@ -6,17 +6,17 @@
     <meta name="description" content="Website Performance Optimization">
     <meta name="author" content="Darren Ware">
     <title>Darren's: Portfolio</title>
-    <link rel="preload" href="dist/fonts/opensans-regular-webfont.woff2" as="font"> <!-- requests fonts early, non-render-blocking-->
-    <link rel="preload" href="dist/fonts/opensans-regular-webfont.woff" as="font">
+    <!--<link rel="preload" href="dist/fonts/opensans-regular-webfont.woff2" as="font"> requests fonts early, non-render-blocking-->
+    <!--<link rel="preload" href="dist/fonts/opensans-regular-webfont.woff" as="font"> -->
     <!-- <link href="//fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet"> removed -->
     <style>
-      @font-face { /* added 'open sans' @fontface typeface instaed of google fonts option */
+      /*@font-face {  added 'open sans' @fontface typeface instaed of google fonts option
         font-family: "opensans_regular";
-          src: url(../fonts/opensans-regular-webfont.woff2) format("woff2"),
-          url(../fonts/opensans-regular-webfont.woff) format("woff");
+          src: url(dist/fonts/opensans-regular-webfont.woff2) format("woff2"),
+          url(dist/fonts/opensans-regular-webfont.woff) format("woff");
           font-weight: normal;
           font-style: normal;
-      }
+      }*/
 
       html {
         font-size: 100%;
@@ -35,7 +35,7 @@
       input,
       select,
       textarea {
-        font-family: "opensans_regular", sans-serif; color: #333;
+        font-family: "Open Sans", sans-serif; color: #333;
       }
 
       a {
@@ -62,7 +62,7 @@
 
       pre,
       code {
-       font-family: monospace, monospace; font-size: 1em;
+        font-family: monospace, monospace; font-size: 1em;
       }
 
       ul,
@@ -203,6 +203,20 @@
           webkitRequestAnimationFrame || msRequestAnimationFrame;
       if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
       else window.addEventListener('load', loadDeferredStyles);
+    </script>
+    <script> // webfont loader script to load google fonts asynchronously
+      WebFontConfig = {
+        google: {
+            families: ['Open Sans']
+          }
+        };
+
+       (function(d) {
+          var wf = d.createElement('script'), s = d.scripts[0];
+          wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+          wf.async = true;
+          s.parentNode.insertBefore(wf, s);
+       })(document);
     </script>
     <script async src="dist/js/perfmatters-min.js"></script> <!-- moved script to bottom of page -->
     <script> //moved analytics scripts to bottom of page
