@@ -17,7 +17,7 @@ The provided websites index.html file (currently very slow running) must be opti
 
 #### Part 2: optimize frames per second in pizza.html
 
-Optimize the provided slow running views/pizza.html making changes to views/js/main.js to optimize the **pixels to screen pipeline** until you achieve **60 frames per second** or higher when scrolling the page. Also the 'pizza size changer' slider must acheive a resize time of less than 5 ms.
+Optimize the provided slow running views/pizza.html making changes to views/js/main.js to optimize the **pixels to screen pipeline** until you achieve **60 frames per second** or higher when scrolling the page. Also the 'pizza size changer' slider must achieve a resize time of less than 5 ms.
 ___
 
 
